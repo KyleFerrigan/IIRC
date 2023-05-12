@@ -41,7 +41,7 @@ class IRCClient: ObservableObject {
 		sendMessage("USER \(nickname) 0 * :\(nickname)\r\n")
 		sendMessage("JOIN #\(channel)\r\n")
 		pingTimer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
-			self.sendMessage("PING :"+self.hostStr+"\r\n")
+			self.sendMessage("PING :irc\r\n")
 		}
 	}
 	
@@ -60,8 +60,22 @@ class IRCClient: ObservableObject {
 	func setupReceive() {
 		connection?.receive(minimumIncompleteLength: 1, maximumLength: 65536) { (data, _, _, error) in
 			if let data = data, let message = String(data: data, encoding: .utf8) {
-				DispatchQueue.main.async {
-					self.messages.append(message)
+				let lines = message.split(separator: "\r\n", omittingEmptySubsequences: false)
+				for line in lines {
+					// Identify the server by the prefix of the first message received
+					if self.server == nil, let prefixEndIndex = line.firstIndex(of: " ") {
+						self.server = String(line[line.startIndex..<prefixEndIndex])
+					}
+					
+					if line.hasPrefix(":\(self.server ?? "") 376") || line.hasPrefix(":\(self.server ?? "") 422") {
+						self.hasReceivedMOTD = true
+					}
+					
+					if self.hasReceivedMOTD {
+						DispatchQueue.main.async {
+							self.messages.append(String(line))
+						}
+					}
 				}
 			}
 			
