@@ -13,6 +13,7 @@ class IRCClient: ObservableObject {
 	var pingTimer: Timer?
 	var hostStr: String = ""
 	var hasReceivedMOTD = false
+	var server: String?
 	@Published var messages: [String] = []
 	
 	func connect(host: String, port: UInt16, nickname: String, channel: String) {
