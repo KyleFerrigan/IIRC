@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ConnectView: View {
+	// Import Vars
 	@Binding var server : String
 	@Binding var port : String
 	@Binding var nickname : String
 	@Binding var channel : String
 	@Binding var isConnected: Bool
 	@ObservedObject var client: IRCClient
+	
+	// Local Vars
 	#if DEBUG
 	@State var isFormFilled = true
 	#else
@@ -22,20 +25,23 @@ struct ConnectView: View {
 	
     var body: some View {
 		List{
-			Section(header: Text("Connection")) {
+			Section(header: Text("Manual Connection")) {
 				TextField("Server", text: $server)
 					.disableAutocorrection(true)
 					.autocapitalization(.none)
 					.onChange(of: server) { _ in updateFormFilled() }
+				
 				TextField("Port", text: $port)
 					.disableAutocorrection(true)
 					.autocapitalization(.none)
 					.keyboardType(.numberPad)
 					.onChange(of: port) { _ in updateFormFilled() }
+				
 				TextField("Nickname", text: $nickname)
 					.disableAutocorrection(true)
 					.autocapitalization(.none)
 					.onChange(of: nickname) { _ in updateFormFilled() }
+				
 				TextField("Channel", text: $channel)
 					.disableAutocorrection(true)
 					.autocapitalization(.none)
@@ -44,24 +50,28 @@ struct ConnectView: View {
 				Button("Connect", action:{
 					self.connect()
 					self.isConnected = true
-					
 				})
 				.foregroundColor(isFormFilled ? .blue : .gray)
 				.disabled(!isFormFilled)
-				
 			}
+			// TODO Add these features in
+			//Section(header: Text("Recent Servers")) {
+			//}
+			//Section(header: Text("Favorite Servers")) {
+			//}
 		}
+		
     }
+	
 	private func updateFormFilled() {
 		isFormFilled = !server.isEmpty && !port.isEmpty && !nickname.isEmpty && !channel.isEmpty
 	}
-	
-	
 	
 	func connect() {
 		guard let portUInt = UInt16(port) else { return }
 		client.connect(host: server, port: portUInt, nickname: nickname, channel: channel)
 	}
+	
 }
 
 struct ConnectView_Previews: PreviewProvider {
