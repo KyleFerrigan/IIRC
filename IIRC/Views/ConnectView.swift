@@ -14,8 +14,11 @@ struct ConnectView: View {
 	@Binding var channel : String
 	@Binding var isConnected: Bool
 	@ObservedObject var client: IRCClient
-	
+	#if DEBUG
+	@State var isFormFilled = true
+	#else
 	@State var isFormFilled = false
+	#endif
 	
     var body: some View {
 		List{

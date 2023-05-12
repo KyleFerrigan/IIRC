@@ -11,20 +11,23 @@ struct ChatView: View {
 	//Import Var
 	@ObservedObject var client: IRCClient
 	var channel : String
+	var nickname : String
+	
 	//Local Vars
-	@State private var messageIn = ""
+	@State private var messageInput = ""
 	
     var body: some View {
 		VStack {
-			List {
-				ForEach($client.messages, id: \.self) { message in
-					Text(message.wrappedValue)
+			ScrollViewReader { scrollView in
+				List {
+					ForEach($client.messages, id: \.self) { message in
+						Text(message.wrappedValue)
+					}
 				}
-			}.padding(.top, 0)
-			
+			}
 			Section {
 				HStack {
-					TextField("Message", text: $messageIn)
+					TextField("Message", text: $messageInput)
 						.disableAutocorrection(true)
 						.textFieldStyle(RoundedBorderTextFieldStyle())
 					Button("Send", action: sendMessage)
@@ -35,14 +38,15 @@ struct ChatView: View {
 		}
     }
 	func sendMessage() {
-		client.sendChatMessage(messageIn, to: channel)
-		messageIn = ""
+		client.sendChatMessage(messageInput, to: channel)
+		client.messages.append((self.nickname + ": " + self.messageInput)) // So you can see your own messages
+		messageInput = ""
 	}
 }
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
 		@State var blank = ""
-		ChatView(client: IRCClient() , channel: blank)
+		ChatView(client: IRCClient() , channel: blank, nickname: "Tester")
     }
 }

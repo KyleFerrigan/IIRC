@@ -9,17 +9,28 @@ import SwiftUI
 
 struct MainView: View {
 	@StateObject private var client = IRCClient()
+	
+	#if DEBUG
+	@State private var server = "irc.libera.chat"
+	@State private var port = "6667"
+	@State private var nickname = "iOSAppTest"
+	@State private var channel = "textual-testing"
+	
+	#else
 	@State private var server = ""
 	@State private var port = ""
 	@State private var nickname = ""
 	@State private var channel = ""
+	#endif
+	
 	@State private var isConnected = false
 	
 	var body: some View {
 		NavigationStack{
 			ConnectView(server: self.$server, port: self.$port, nickname: self.$nickname, channel: self.$channel, isConnected: self.$isConnected, client: self.client)
+			
 			NavigationLink(
-				destination: ChatView(client: client, channel: channel)
+				destination: ChatView(client: client, channel: channel, nickname: nickname)
 					.onDisappear (perform: disconnect)
 				,
 				isActive: $isConnected,

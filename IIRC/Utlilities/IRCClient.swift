@@ -62,8 +62,16 @@ class IRCClient: ObservableObject {
 	func setupReceive() {
 		connection?.receive(minimumIncompleteLength: 1, maximumLength: 65536) { (data, _, _, error) in
 			if let data = data, let message = String(data: data, encoding: .utf8) {
-				DispatchQueue.main.async {
-					self.messages.append(message)
+				
+				// Handle PING request
+				if message.contains("PING :") {
+					let server = message.replacingOccurrences(of: "PING :", with: "")
+					self.sendMessage("PONG :\(server)\r\n")
+					print("Received Ping, Sent Pong")
+				} else {
+					DispatchQueue.main.async {
+						self.messages.append(message)
+					}
 				}
 			}
 			
