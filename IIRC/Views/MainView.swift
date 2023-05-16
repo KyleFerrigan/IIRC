@@ -13,7 +13,7 @@ struct MainView: View {
 	#if DEBUG
 	@State private var server = "irc.libera.chat"
 	@State private var port = "6667"
-	@State private var nickname = "iOSAppTest"
+	@State private var nickname = "Dev-Test"
 	@State private var channel = "textual-testing"
 	#else
 	@State private var server = ""
@@ -45,8 +45,13 @@ struct MainView: View {
 	}
 	
 	func disconnect() {
+		//Set all values back to normal
 		client.connection?.cancel() // Close the connection
 		client.connection = nil // Set the connection to nil
+		client.serverHostname = ""
+		client.motdFinished = false
+		client.messages = []
+		client.isConnected = false
 		isConnected = false
 	}
 }

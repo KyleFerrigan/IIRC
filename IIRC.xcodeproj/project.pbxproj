@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9300BC9E2A0E93F400C2DAD1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BC9D2A0E93F400C2DAD1 /* ChatView.swift */; };
-		9300BCA22A0E943400C2DAD1 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300BCA12A0E943400C2DAD1 /* ConnectView.swift */; };
 		93A72F672A0EA34F006C710A /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A72F642A0EA34F006C710A /* ConnectView.swift */; };
 		93A72F692A0EA34F006C710A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A72F662A0EA34F006C710A /* ChatView.swift */; };
 		93CA3ABB2A0D8C6F004A8486 /* IIRCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CA3ABA2A0D8C6F004A8486 /* IIRCApp.swift */; };
@@ -39,8 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9300BC9D2A0E93F400C2DAD1 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		9300BCA12A0E943400C2DAD1 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 		93A72F642A0EA34F006C710A /* ConnectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 		93A72F662A0EA34F006C710A /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		93CA3AB72A0D8C6F004A8486 /* IIRC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IIRC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,22 +88,12 @@
 		9300BCA02A0E940500C2DAD1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				93A72F632A0EA34F006C710A /* Views */,
-				9300BCA12A0E943400C2DAD1 /* ConnectView.swift */,
-				9300BC9D2A0E93F400C2DAD1 /* ChatView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		93A72F632A0EA34F006C710A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				93CA3ABC2A0D8C6F004A8486 /* MainView.swift */,
 				93CA3ABA2A0D8C6F004A8486 /* IIRCApp.swift */,
+				93CA3ABC2A0D8C6F004A8486 /* MainView.swift */,
 				93A72F642A0EA34F006C710A /* ConnectView.swift */,
 				93A72F662A0EA34F006C710A /* ChatView.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		93CA3AAE2A0D8C6F004A8486 = {
@@ -296,12 +282,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9300BC9E2A0E93F400C2DAD1 /* ChatView.swift in Sources */,
 				93CA3ABD2A0D8C6F004A8486 /* MainView.swift in Sources */,
 				93CA3ABB2A0D8C6F004A8486 /* IIRCApp.swift in Sources */,
 				93A72F692A0EA34F006C710A /* ChatView.swift in Sources */,
 				93A72F672A0EA34F006C710A /* ConnectView.swift in Sources */,
-				9300BCA22A0E943400C2DAD1 /* ConnectView.swift in Sources */,
 				93CA3AEB2A0D93B7004A8486 /* IRCClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
