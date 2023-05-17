@@ -7,19 +7,27 @@
 
 import SwiftUI
 
+//Allow chat history array to be stored in @AppStorage
+
+
 struct ConnectView: View {
-	// Import Vars
-	@Binding var server : String
-	@Binding var port : String
-	@Binding var nickname : String
-	@Binding var channel : String
-	@Binding var isConnected: Bool
-	@ObservedObject var client: IRCClient
 	
-	// Local Vars
+	// MARK: - Variables
+	@StateObject var client = IRCClient()
+	@AppStorage("Keep Chat History") var keepChatHistory: Bool = false
+	@AppStorage("Default Nickname") var defaultNickname: String = ""
+	
 	#if DEBUG
+	@State private var server = "irc.libera.chat"
+	@State private var port = "6667"
+	@State private var nickname = "Dev-Test"
+	@State private var channel = "textual-testing"
 	@State var isFormFilled = true
 	#else
+	@State private var server = ""
+	@State private var port = ""
+	@State private var nickname = self.defaultNickname
+	@State private var channel = ""
 	@State var isFormFilled = false
 	#endif
 	
@@ -47,37 +55,55 @@ struct ConnectView: View {
 					.autocapitalization(.none)
 					.onChange(of: channel) { _ in updateFormFilled() }
 				
-				Button("Connect", action:{
-					self.connect()
-					self.isConnected = true
-				})
-				.foregroundColor(isFormFilled ? .blue : .gray)
-				.disabled(!isFormFilled)
+				NavigationLink("Connect", destination: ChatView(client: client, channel: channel, nickname: nickname).onAppear(perform: connect).onDisappear(perform: disconnect))
+					.foregroundColor(self.isFormFilled ? .blue : .gray)
+					.disabled(!self.isFormFilled)
+					
 			}
-			// TODO Add these features in
+			
+			// TODO: - Add these recent and favorite features in
+			
 			//Section(header: Text("Recent Servers")) {
 			//}
+			
 			//Section(header: Text("Favorite Servers")) {
 			//}
 		}
 		
     }
 	
+	// MARK: - UpdateFormFilled
 	private func updateFormFilled() {
+		print("UpdateFormFilled Function Ran")
 		isFormFilled = !server.isEmpty && !port.isEmpty && !nickname.isEmpty && !channel.isEmpty
 	}
 	
+	// MARK: - Connect
 	func connect() {
+		print("Connect Function Ran")
 		guard let portUInt = UInt16(port) else { return }
 		client.connect(host: server, port: portUInt, nickname: nickname, channel: channel)
 	}
 	
+	// MARK: - Disconnect
+	func disconnect() {
+		print("Disconnect Function Ran")
+		//Set all values back to normal
+		client.connection?.cancel() // Close the connection
+		client.connection = nil // Set the connection to nil
+		client.serverHostname = ""
+		client.motdFinished = false
+		client.isConnected = false
+		client.channel = ""
+		if (!keepChatHistory){
+			client.messages = []
+		}
+	}
 }
 
+// MARK: - Preview
 struct ConnectView_Previews: PreviewProvider {
     static var previews: some View {
-		@State var blank = ""
-		@State var isConnected = false
-		ConnectView(server: $blank, port: $blank, nickname: $blank, channel: $blank, isConnected: $isConnected, client: IRCClient())
+		ConnectView(client: IRCClient())
     }
 }

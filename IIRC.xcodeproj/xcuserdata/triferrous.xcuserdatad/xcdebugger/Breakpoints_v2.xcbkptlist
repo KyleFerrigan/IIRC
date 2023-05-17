@@ -30,8 +30,8 @@
             filePath = "IIRC/Utlilities/IRCClient.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "processIRCMessage(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "IIRC/Utlilities/IRCClient.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "processIRCMessage(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -56,16 +56,63 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "4CA01DCF-4995-431D-84AF-D907308AB1AF"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IIRC/Utlilities/IRCClient.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "processIRCMessage(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4CA01DCF-4995-431D-84AF-D907308AB1AF - 7543bfadcf88fb20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.processIRCMessage(Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "2388">
+               </Location>
+               <Location
+                  uuid = "4CA01DCF-4995-431D-84AF-D907308AB1AF - 7543bfadcf88fb20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.processIRCMessage(Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1280">
+               </Location>
+               <Location
+                  uuid = "4CA01DCF-4995-431D-84AF-D907308AB1AF - 7543bfadcf88fb03"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.processIRCMessage(Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "1280">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,10 +125,152 @@
             filePath = "IIRC/Utlilities/IRCClient.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "processIRCMessage(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "715B59B3-5A04-49D6-8A48-C1D85BE95EE2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IIRC/Utlilities/IRCClient.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "filter(line:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EC7B7806-D323-42D7-A130-4DC495DBBC99"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IIRC/Utlilities/IRCClient.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "filter(line:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EC7B7806-D323-42D7-A130-4DC495DBBC99 - 973dfce383d6bdfe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.filter(line: Swift.String) -&gt; Swift.String"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "8544">
+               </Location>
+               <Location
+                  uuid = "EC7B7806-D323-42D7-A130-4DC495DBBC99 - 973dfce383d6bdb8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.filter(line: Swift.String) -&gt; Swift.String"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "8492">
+               </Location>
+               <Location
+                  uuid = "EC7B7806-D323-42D7-A130-4DC495DBBC99 - 973dfce383d6bce7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.filter(line: Swift.String) -&gt; Swift.String"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "148"
+                  endingLineNumber = "148"
+                  offsetFromSymbolStart = "6992">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "080092B6-030D-40AA-9738-0A163663258A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IIRC/Utlilities/IRCClient.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "processIRCMessage(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "080092B6-030D-40AA-9738-0A163663258A - 7543bfadcf88fb87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.processIRCMessage(Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "2408">
+               </Location>
+               <Location
+                  uuid = "080092B6-030D-40AA-9738-0A163663258A - 7543bfadcf88fb41"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.processIRCMessage(Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "1928">
+               </Location>
+               <Location
+                  uuid = "080092B6-030D-40AA-9738-0A163663258A - 7543bfadcf88fb20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "IIRC.IRCClient.processIRCMessage(Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "IIRC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/triferrous/Library/Mobile%20Documents/com~apple~CloudDocs/Developer/Xcode/iOS%20Applications/IIRC/IIRC/Utlilities/IRCClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1928">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

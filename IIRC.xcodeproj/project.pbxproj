@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93882F572A1556C700E882AA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93882F562A1556C700E882AA /* SettingsView.swift */; };
 		93A72F672A0EA34F006C710A /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A72F642A0EA34F006C710A /* ConnectView.swift */; };
 		93A72F692A0EA34F006C710A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A72F662A0EA34F006C710A /* ChatView.swift */; };
 		93CA3ABB2A0D8C6F004A8486 /* IIRCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CA3ABA2A0D8C6F004A8486 /* IIRCApp.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		93882F562A1556C700E882AA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		93A72F642A0EA34F006C710A /* ConnectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 		93A72F662A0EA34F006C710A /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		93CA3AB72A0D8C6F004A8486 /* IIRC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IIRC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +94,7 @@
 				93CA3ABC2A0D8C6F004A8486 /* MainView.swift */,
 				93A72F642A0EA34F006C710A /* ConnectView.swift */,
 				93A72F662A0EA34F006C710A /* ChatView.swift */,
+				93882F562A1556C700E882AA /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				93CA3ABD2A0D8C6F004A8486 /* MainView.swift in Sources */,
 				93CA3ABB2A0D8C6F004A8486 /* IIRCApp.swift in Sources */,
 				93A72F692A0EA34F006C710A /* ChatView.swift in Sources */,
+				93882F572A1556C700E882AA /* SettingsView.swift in Sources */,
 				93A72F672A0EA34F006C710A /* ConnectView.swift in Sources */,
 				93CA3AEB2A0D93B7004A8486 /* IRCClient.swift in Sources */,
 			);

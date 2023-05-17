@@ -6,6 +6,27 @@
 //
 import Foundation
 import Network
+import SwiftUI
+
+extension Array: RawRepresentable where Element: Codable {
+	public init?(rawValue: String) {
+		guard let data = rawValue.data(using: .utf8),
+			  let result = try? JSONDecoder().decode([Element].self, from: data)
+		else {
+			return nil
+		}
+		self = result
+	}
+	
+	public var rawValue: String {
+		guard let data = try? JSONEncoder().encode(self),
+			  let result = String(data: data, encoding: .utf8)
+		else {
+			return "[]"
+		}
+		return result
+	}
+}
 
 class IRCClient : ObservableObject {
 	// MARK: - Variables
@@ -16,7 +37,8 @@ class IRCClient : ObservableObject {
 	var channel : String = ""
 	var motdFinished : Bool = false
 	var isConnected : Bool = false
-	@Published var messages : [String] = []
+	@AppStorage("Messages") var messages: [String] = []
+	@AppStorage("Show Server Messages") var showServerMessages: Bool = false
 	
 	// MARK: - Connect
 	func connect(host: String, port: UInt16, nickname: String, channel: String) {
@@ -73,8 +95,10 @@ class IRCClient : ObservableObject {
 		if (serverHostname == ""){
 			serverHostname = (lines[0].dropLast(lines[0].distance(from: lines[0].dropFirst().firstIndex(of: " ") ?? lines[0].endIndex, to: lines[0].endIndex ))).dropFirst().lowercased()
 		}
+		//Update channel name after motd is finished
 		if (channel == "" && motdFinished) {
-			channel = (lines[0].dropFirst(lines[0].distance(from: lines[0].startIndex, to: lines[0].dropFirst().firstIndex(of: "#") ?? lines[0].startIndex ))).dropFirst().lowercased()
+			channel = String((lines[0].dropFirst(lines[0].distance(from: lines[0].startIndex, to: lines[0].dropFirst().firstIndex(of: "#") ?? lines[0].startIndex ))).dropFirst())
+			channel = String(channel.dropLast(channel.distance(from: channel.firstIndex(of: " ") ?? channel.startIndex, to: channel.endIndex)))
 		}
 		
 		// Handle PING request
@@ -84,7 +108,7 @@ class IRCClient : ObservableObject {
 			print("Received Ping, Sent Pong")
 		} else {
 			for line in lines {
-				var temp = filter(line: line)
+				let temp = filter(line: line)
 				// Dont show blank lines
 				if temp != "" {
 					filteredMessages.append(filter(line: line))
@@ -101,22 +125,23 @@ class IRCClient : ObservableObject {
 		
 		switch line {
 				
-			// MARK: - Server Connections, Ignore for now.
-			// TODO: - Add toggle in settings for if user wants to see server messages
+			// MARK: - Server Connections
 			case let str where (str.contains("NOTICE") || str.contains("001") || str.contains("002") || str.contains("003") || str.contains("004") || str.contains("005") || str.contains("251") || str.contains("252") || str.contains("253") || str.contains("254") || str.contains("255") || str.contains("265") || str.contains("266") || str.contains("250") || str.contains("250") || str.isEmpty):
 				if (!isConnected) {
 					isConnected = true
-					messages.append("Connecting...")
+					messages.append("Connecting to Server...")
 				}
-				/* Uncomment this block to show server messages
 				
-				let nickname = "SERVER"
-				messageContent = ("\(nickname): \(line)") //line.dropFirst(line.distance(from: line.startIndex, to: (line.dropFirst().firstIndex(of: ":") ?? line.startIndex))+1) */
-				return ""
+				// Remove empty lines
+				if str.isEmpty { return "" }
+					
+				// If toggled on in settings, show server connection messages
+				if (showServerMessages){
+					let nickname = "SERVER"
+					messageContent = ("\(nickname): \(str.dropFirst(str.distance(from: str.startIndex, to: (str.dropFirst().firstIndex(of: ":") ?? str.startIndex))+1))")
+					return messageContent
+				}
 				
-			// MARK: - Admin List, End of Names Message, & End of MOTD Message. Ignore for now
-			// TODO: - Add note of which users are admins
-			case let str where (str.contains("333")/*Admin List*/ || str.contains("366")/*User END*/ || str.contains("376")/*MOTD END*/):
 				return ""
 				
 			// MARK: - User List
@@ -132,16 +157,21 @@ class IRCClient : ObservableObject {
 				messageContent = ("\(line.dropFirst(line.distance(from: line.startIndex, to: (line.dropFirst().firstIndex(of: ":") ?? line.startIndex))+1))")
 				if line.contains("332"){
 					motdFinished = true
+					messages.append("Connecting to Channel...")
 				}
 				return messageContent
 				
 			// MARK: - User Group Message
-			// TODO: URGENT! Fix message content
 			case let str where (str.contains("PRIVMSG")):
 				let nickname = ("\((line.dropLast(line.distance(from: line.dropFirst().firstIndex(of: "!") ?? line.startIndex, to:  line.endIndex))).dropFirst())")
-				messageContent = ("\(nickname): \((line.dropFirst(findSubstringIndex(string: line, substring: self.channel) ?? 0))))")
+				messageContent = ("\(nickname): \((line.dropFirst(findSubstringIndex(string: line, substring: self.channel) ?? 0).dropFirst(channel.count + 2)))")
 				//messageContent = line
 				return messageContent
+				
+			// MARK: - Ignore List
+			// TODO: - Add note of which users are admins
+			case let str where (str.contains("333")/*Admin List*/ || str.contains("366")/*User END*/ || str.contains("376")/*MOTD END*/ || str.contains("328")):
+				return ""
 				
 			//MARK: - Default
 			default:
@@ -150,48 +180,7 @@ class IRCClient : ObservableObject {
 				}
 				print("Line not shown: " + line) // DEBUG
 				return ""
-				
 		}
-		/*
-		if (line.contains("NOTICE")||line.contains("001")||line.contains("002")||line.contains("003")||line.contains("004")||line.contains("005")||line.contains("251")||line.contains("252")||line.contains("253")||line.contains("254")||line.contains("255")||line.contains("265")||line.contains("266")||line.contains("250")||line.isEmpty
-		) { //Server Connection Messages: Drop them, user does not need to see them
-			if (!isConnected) {
-				isConnected = true
-				messages.append("Connecting...")
-			}
-			//let nickname = "SERVER"
-			//messageContent = ("\(nickname): \(line)") //line.dropFirst(line.distance(from: line.startIndex, to: (line.dropFirst().firstIndex(of: ":") ?? line.startIndex))+1)
-			return ""
-		} else if (line.contains("333") || line.contains("366")){// Ignore, Admin List and End of Names list message
-			return ""
-		} else if (line.contains("353")){ // Users
-			let nickname = "Users"
-			messageContent = ("\(nickname): \(line.dropFirst(line.distance(from: line.startIndex, to: (line.dropFirst().firstIndex(of: ":") ?? line.startIndex))+1))")
-			return messageContent
-		} else if (line.contains("375")||line.contains("372") || line.contains("376") || line.contains("332")){ //Message of the Day
-			messageContent = ("\(line.dropFirst(line.distance(from: line.startIndex, to: (line.dropFirst().firstIndex(of: ":") ?? line.startIndex))+1))")
-			if line.contains("332"){
-				motdFinished = true
-			}
-			return messageContent
-		} else if (line.contains("MODE")){ //mode
-			//let nickname = "MODE"
-			//messageContent = ("\(nickname): \(line)")
-			//filteredMessages.append((messageContent))
-			return ""
-		} else if (line.contains("PRIVMSG")) { //User Messages
-			// Extract the nickname
-			let nickname = ("\((line.dropLast(line.distance(from: line.dropFirst().firstIndex(of: "!") ?? line.startIndex, to:  line.endIndex))).dropFirst())")
-			messageContent = ("\(nickname): \((line.dropFirst(findSubstringIndex(string: line, substring: self.channel) ?? 0))))")
-			//messageContent = line
-			// Append the filtered message to the result
-			return messageContent
-		} else { //Unknown, dont filter
-			// Append the unfiltered message to the result
-			return line
-		}
-		 */
-		
 	}
 	
 	// MARK: - FindSubstringIndex

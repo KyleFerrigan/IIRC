@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ChatView: View {
-	// Import Var
+	
+	// MARK: - Variables
+	@AppStorage("showServerMessages") var showServerMessages: Bool = false
 	@ObservedObject var client: IRCClient
 	var channel : String
 	var nickname : String
 	
-	// Local Vars
+	
 	@State private var messageInput = ""
 	@State private var messagesCount = 0
 	@State private var isPinnedToBottom = true
@@ -48,11 +50,13 @@ struct ChatView: View {
 				Button(action:{
 					isPinnedToBottom.toggle()
 				}){
-					Text("Pin")
+					Image(systemName: (self.isPinnedToBottom ? "pin.circle.fill": "pin.circle"))
 				}
 			}
 		}
-    }
+		.navigationTitle("Chat")
+		.navigationBarTitleDisplayMode(.inline)
+	}
 		
 	func sendMessage() {
 		client.sendChatMessage(messageInput, to: channel)
