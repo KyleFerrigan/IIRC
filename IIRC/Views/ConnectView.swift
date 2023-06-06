@@ -92,9 +92,12 @@ struct ConnectView: View {
 		client.connection?.cancel() // Close the connection
 		client.connection = nil // Set the connection to nil
 		client.serverHostname = ""
+		client.channel = ""
 		client.motdFinished = false
 		client.isConnected = false
-		client.channel = ""
+		
+		
+		
 		if (!keepChatHistory){
 			client.messages = []
 		}

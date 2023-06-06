@@ -32,7 +32,6 @@ class IRCClient : ObservableObject {
 	// MARK: - Variables
 	var connection : NWConnection?
 	let queue = DispatchQueue(label: "IRC Queue")
-	var hostStr : String = ""
 	var serverHostname : String = ""
 	var channel : String = ""
 	var motdFinished : Bool = false
@@ -42,7 +41,6 @@ class IRCClient : ObservableObject {
 	
 	// MARK: - Connect
 	func connect(host: String, port: UInt16, nickname: String, channel: String) {
-		self.hostStr = host
 		let parameters = NWParameters.tcp
 		let endpoint = NWEndpoint.hostPort(host: NWEndpoint.Host(host), port: NWEndpoint.Port(rawValue: port) ?? NWEndpoint.Port(integerLiteral: 6667))
 	
@@ -119,6 +117,7 @@ class IRCClient : ObservableObject {
 	}
 	
 	// MARK: - Filter
+	// TODO: Add more edge cases, need to fix when user changes name and when a user joins
 	func filter(line: String) -> String {
 		var messageContent: String
 		print(line) //DEBUG
@@ -152,10 +151,9 @@ class IRCClient : ObservableObject {
 				return messageContent
 				
 			// MARK: - Message of the Day
-			// TODO: - Remove "End of /MOTD command."
 			case let str where (str.contains("375") || str.contains("372") || str.contains("332")):
 				messageContent = ("\(line.dropFirst(line.distance(from: line.startIndex, to: (line.dropFirst().firstIndex(of: ":") ?? line.startIndex))+1))")
-				if line.contains("332"){
+				if (line.contains("332") && !motdFinished){
 					motdFinished = true
 					messages.append("Connecting to Channel...")
 				}
